@@ -123,18 +123,18 @@ int ResAdd(HERO *PY) ///使用资源值进行骰子加成的函数
 }
 
 ///英雄的秘宝效果
-void HolySwordsman_Tre(HERO *PY) ///剑圣秘宝「法力秘药」
+void HolySwordsman_Tre(HERO *PY) ///剑圣秘宝「远古秘药」
 {
     if(PY->Treasure)
     {
-        printf("剑圣秘宝「法力秘药」发动！\n");
+        printf("剑圣秘宝「远古秘药」发动！\n");
         printf("资源值上限+1且全回复\n");
         PY->resourseMP++;
         PY->resourseP=PY->resourseMP;
     }
 }
 
-int Ninja_Tre(HERO *PY)  ///忍者秘宝「胧霞」
+int Ninja_Tre(HERO *PY,DICE num)  ///忍者秘宝「胧霞」
 {
         printf("是否使用秘宝「胧霞」？（Y/N）\n");
         printf("（一回合一次，决战阶段暴击判定前可以重投一次所有骰子）：");
@@ -147,16 +147,19 @@ int Ninja_Tre(HERO *PY)  ///忍者秘宝「胧霞」
             temp=PY->fightP+ResAdd(PY);
             return HeroCheck(temp);
         case 'N':
-            return HeroCheck(PY->fightP);
+            return num;
         default:
             printf("Error：请重新输入！");
-            return Ninja_Tre(PY);
+            return Ninja_Tre(PY,num);
         }
 }
 
-int Hunter_Tre(HERO PY) ///猎人秘宝「致命子弹」
+int Hunter_Tre(HERO *PY,DICE num) ///猎人秘宝「致命子弹」
 {
-    if(PY.Treasure)
+    static int canbeUse=3;
+    if(canbeUse<=0)
+        return num;
+    if(PY->Treasure)
     {
         char chark_ch;
         printf("是否使用秘宝「致命子弹」？（Y/N）\n");
@@ -165,15 +168,18 @@ int Hunter_Tre(HERO PY) ///猎人秘宝「致命子弹」
         switch(chark_ch)
         {
         case 'Y':
-            return HeroCheck(++PY.fightP);
+            num=HeroCheck(++PY->fightP);
+            PY->fightP--;
+            canbeUse--;
+            return num;
         case 'N':
-            return HeroCheck(PY.fightP);
+            return num;
         default:
-            return Hunter_Tre(PY);
+            return Hunter_Tre(PY,num);
         }
     }
     else
-        return HeroCheck(PY.fightP);
+        return num;
 }
 
 void Gladiator_Tre(HERO *PY) ///角斗士秘宝「猛犸肉」
@@ -183,6 +189,39 @@ void Gladiator_Tre(HERO *PY) ///角斗士秘宝「猛犸肉」
         printf("角斗士秘宝「猛犸肉」发动！\n");
         printf("生命值全部恢复了\n");
         PY->lifeP=PY->lifeMP;
+    }
+}
+
+void Prince_Tre(HERO *PY) ///王子秘宝「宝藏」
+{
+    if(PY->Treasure)
+    {
+        printf("王子秘宝「宝藏」发动！\n");
+        printf("获得3个金币资源（金币不会因为龙的效果影响）\n");
+        PY->resourseP+=3;
+    }
+}
+
+void Paladin_Tre(HERO *py,HERO *PY[],int pynum) ///圣骑士秘宝「白银之盾」
+{
+    static int canbeUse=1;
+    if(canbeUse<=0)
+        exit(0);
+    if(py->Treasure)
+    {
+        printf("圣骑士秘宝「白银之盾」发动！\n");
+        printf("（决战阶段限一次，群体生命+1或单体生命+2）\n");
+        int num,i;
+        printf("请输入治疗者的序号（全体治疗请输入0）：");
+        scanf("%d",&num);
+        if(num==0)
+            for(i=0;i<pynum;i++)
+                PY[i]->lifeP++;
+        else if(num>0 && num<=pynum)
+            PY[num-1]+=2;
+        else
+            exit(0);
+        canbeUse--;
     }
 }
 

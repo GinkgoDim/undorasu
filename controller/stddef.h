@@ -7,10 +7,10 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h> ///linux上类似Windows.h的头文件
+#include <malloc.h>
 
 #define FALSE 0
 #define ERROR -1
-
 
 int getMAX(int *dice, int num) ///获取最大值
 {

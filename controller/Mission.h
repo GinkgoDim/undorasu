@@ -3,12 +3,9 @@
 #define MISSION_H_INCLUDED
 
 #include "HeroMod.h"
-#define SOLO 1
-#define DOUBLE 2
-#define MULTI 3
 DICE HeroCheck(DICE);
 
-typedef void MISSION;
+typedef int MISSION;
 
 ///角色升级的强化
 void Levelup(HERO *py)
@@ -175,6 +172,7 @@ MISSION HeroLastWords_2p(HERO *PY1, HERO *PY2)
     printf("任务成功！参与者每人获得1点Exp\n");
     Levelup(PY1);
     Levelup(PY2);
+    return 1;
 }
 MISSION HeroLastWords_3p(HERO *PY1, HERO *PY2, HERO *PY3)
 {
@@ -185,6 +183,7 @@ MISSION HeroLastWords_3p(HERO *PY1, HERO *PY2, HERO *PY3)
     Levelup(PY1);
     Levelup(PY2);
     Levelup(PY3);
+    return 1;
 }
 ///*******************任务二：迷之碑文**********************
 MISSION Inscription_1p(HERO *PY)
@@ -196,6 +195,7 @@ MISSION Inscription_1p(HERO *PY)
         printf("\n任务成功！获得2点Exp\n");
         PY->Exp += 2;
         Levelup(PY);
+        return 1;
     }
     else
     {
@@ -203,6 +203,7 @@ MISSION Inscription_1p(HERO *PY)
         if (CP > 2)
             CP = 2;
         printf("\n任务失败！还剩%d点完成\n", CP);
+        return 0;
     }
 }
 MISSION Inscription_2p(HERO *PY, HERO *PY2)
@@ -216,6 +217,7 @@ MISSION Inscription_2p(HERO *PY, HERO *PY2)
         PY2->Exp++;
         Levelup(PY);
         Levelup(PY2);
+        return 1;
     }
     else
     {
@@ -223,6 +225,7 @@ MISSION Inscription_2p(HERO *PY, HERO *PY2)
         if (CP > 2)
             CP = 2;
         printf("\n任务失败！还剩%d点完成\n", CP);
+        return 0;
     }
 }
 MISSION Inscription_3p(HERO *PY, HERO *PY2, HERO *PY3)
@@ -238,6 +241,7 @@ MISSION Inscription_3p(HERO *PY, HERO *PY2, HERO *PY3)
         Levelup(PY);
         Levelup(PY2);
         Levelup(PY3);
+        return 1;
     }
     else
     {
@@ -245,6 +249,7 @@ MISSION Inscription_3p(HERO *PY, HERO *PY2, HERO *PY3)
         if (CP > 2)
             CP = 2;
         printf("\n任务失败！还剩%d点完成\n", CP);
+        return 0;
     }
 }
 ///********************任务三：魔像守护者***********************
@@ -264,6 +269,7 @@ MISSION MagicGuardian_1p(HERO *PY)
         printf("\n任务成功！获得2点Exp\n");
         PY->Exp += 2;
         Levelup(PY);
+        return 1;
     }
     else
     {
@@ -271,6 +277,7 @@ MISSION MagicGuardian_1p(HERO *PY)
         if (CP > 3)
             CP = 3;
         printf("\n任务失败！还剩%d点完成\n", CP);
+        return 0;
     }
 }
 MISSION MagicGuardian_2p(HERO *PY, HERO *PY2)
@@ -291,6 +298,7 @@ MISSION MagicGuardian_2p(HERO *PY, HERO *PY2)
         PY2->Exp++;
         Levelup(PY);
         Levelup(PY2);
+        return 1;
     }
     else
     {
@@ -298,6 +306,7 @@ MISSION MagicGuardian_2p(HERO *PY, HERO *PY2)
         if (CP > 3)
             CP = 3;
         printf("\n任务失败！还剩%d点完成\n", CP);
+        return 0;
     }
 }
 MISSION MagicGuardian_3p(HERO *PY, HERO *PY2, HERO *PY3)
@@ -320,6 +329,7 @@ MISSION MagicGuardian_3p(HERO *PY, HERO *PY2, HERO *PY3)
         Levelup(PY);
         Levelup(PY2);
         Levelup(PY3);
+        return 1;
     }
     else
     {
@@ -327,6 +337,7 @@ MISSION MagicGuardian_3p(HERO *PY, HERO *PY2, HERO *PY3)
         if (CP > 3)
             CP = 3;
         printf("\n任务失败！还剩%d点完成\n", CP);
+        return 0;
     }
 }
 ///*************************任务四：哥布林小队*************************
@@ -339,6 +350,7 @@ MISSION GoblinTeam_1p(HERO *PY)
         printf("\n任务成功！获得2点Exp\n");
         PY->Exp += 3;
         Levelup(PY);
+        return 1;
     }
     else
     {
@@ -347,6 +359,7 @@ MISSION GoblinTeam_1p(HERO *PY)
         if (CP > 3)
             CP = 3;
         printf("\n任务失败！挑战者受到1点伤害，还剩%d点完成\n", CP);
+        return 0;
     }
 }
 MISSION GoblinTeam_2p(HERO *PY, HERO *PY2)
@@ -360,6 +373,7 @@ MISSION GoblinTeam_2p(HERO *PY, HERO *PY2)
         PY2->Exp++;
         Levelup(PY);
         Levelup(PY2);
+        return 1;
     }
     else
     {
@@ -368,6 +382,7 @@ MISSION GoblinTeam_2p(HERO *PY, HERO *PY2)
         if (CP > 3)
             CP = 3;
         printf("\n任务失败！挑战者受到1点伤害，还剩%d点完成\n", CP);
+        return 0;
     }
 }
 MISSION GoblinTeam_3p(HERO *PY, HERO *PY2, HERO *PY3)
@@ -383,6 +398,7 @@ MISSION GoblinTeam_3p(HERO *PY, HERO *PY2, HERO *PY3)
         Levelup(PY);
         Levelup(PY2);
         Levelup(PY3);
+        return 1;
     }
     else
     {
@@ -391,6 +407,7 @@ MISSION GoblinTeam_3p(HERO *PY, HERO *PY2, HERO *PY3)
         if (CP > 3)
             CP = 3;
         printf("\n任务失败！挑战者受到1点伤害，还剩%d点完成\n", CP);
+        return 0;
     }
 }
 ///***************************任务五：魔兽奇美拉***************************
@@ -410,6 +427,7 @@ MISSION Chimera_1p(HERO *PY)
         printf("\n任务成功！获得2点Exp\n");
         PY->Exp += 2;
         Levelup(PY);
+        return 1;
     }
     else
     {
@@ -418,6 +436,7 @@ MISSION Chimera_1p(HERO *PY)
         if (CP > 2)
             CP = 2;
         printf("\n任务失败！挑战者受到1点伤害，还剩%d点完成\n", CP);
+        return 0;
     }
 }
 MISSION Chimera_2p(HERO *PY, HERO *PY2)
@@ -438,6 +457,7 @@ MISSION Chimera_2p(HERO *PY, HERO *PY2)
         PY2->Exp++;
         Levelup(PY);
         Levelup(PY2);
+        return 1;
     }
     else
     {
@@ -446,6 +466,7 @@ MISSION Chimera_2p(HERO *PY, HERO *PY2)
         if (CP > 2)
             CP = 2;
         printf("\n任务失败！挑战者受到1点伤害，还剩%d点完成\n", CP);
+        return 0;
     }
 }
 MISSION Chimera_3p(HERO *PY, HERO *PY2, HERO *PY3)
@@ -468,6 +489,7 @@ MISSION Chimera_3p(HERO *PY, HERO *PY2, HERO *PY3)
         Levelup(PY);
         Levelup(PY2);
         Levelup(PY3);
+        return 1;
     }
     else
     {
@@ -476,6 +498,7 @@ MISSION Chimera_3p(HERO *PY, HERO *PY2, HERO *PY3)
         if (CP > 2)
             CP = 2;
         printf("\n任务失败！挑战者受到1点伤害，还剩%d点完成\n", CP);
+        return 0;
     }
 }
 ///*****************************任务六：斯芬克斯之谜**********************
@@ -488,6 +511,7 @@ MISSION SphinxMystery_1p(HERO *PY)
         printf("任务成功！获得2点Exp\n");
         PY->Exp += 2;
         Levelup(PY);
+        return 1;
     }
     else
     {
@@ -496,42 +520,53 @@ MISSION SphinxMystery_1p(HERO *PY)
         if (CP > 1)
             CP = 1;
         printf("\n任务失败！挑战者受到2点伤害，还剩%d点完成\n", CP);
+        return 0;
     }
 }
 
 /********************任务奖励************************/
-void DraBook(HERO *py1, HERO *py2, HERO *py3) ///任务奖励：秘龙之书（1）
+void DraBook(HERO *py[],int pynum,MISSION out) ///任务奖励：秘龙之书（1）
 {
+    if(out==0)
+        exit(0);
+    int i;
     printf("获得秘龙之书！所有人经验值+1\n");
-    py1->Exp++;
-    py2->Exp++;
-    py3->Exp++;
+    for(i=0;i<pynum;i++)
+        py[i]->Exp++;
 }
 
-void DraWeapon(HERO *py1, HERO *py2, HERO *py3) ///任务奖励：屠龙武器（2）
+void DraWeapon(HERO *py[],int pynum,MISSION out) ///任务奖励：屠龙武器（2）
 {
+    if(out==0)
+        exit(0);
+    int i;
     printf("获得屠龙武器！所有人战斗力+1\n");
-    py1->fightP++;
-    py2->fightP++;
-    py3->fightP++;
+    for(i=0;i<pynum;i++)
+        py[i]->fightP++;
 }
 
-void DraMapPlece(Dragonic *Dra) ///任务奖励：匿龙地图（3）
+void DraMapPlece(Dragonic *Dra,MISSION out) ///任务奖励：匿龙地图（3）
 {
+    if(out==0)
+        exit(0);
     printf("获得匿龙地图！龙遭受一次突袭，受到1点伤害\n");
     Dra->lifeD--;
 }
 
-void DraBlood(HERO *py1, HERO *py2, HERO *py3) ///任务奖励：古龙之血（4）
+void DraBlood(HERO *py[],int pynum,MISSION out) ///任务奖励：古龙之血（4）
 {
+    if(out==0)
+        exit(0);
+    int i;
     printf("获得古龙之血！所有人生命值全回复\n");
-    py1->lifeP = py1->lifeMP;
-    py2->lifeP = py2->lifeMP;
-    py3->lifeP = py3->lifeMP;
+    for(i=0;i<pynum;i++)
+        py[i]->lifeP=py[i]->lifeMP;
 }
 
-void DraTreasure(HERO *py) ///任务奖励：龙之秘宝（5）
+void DraTreasure(HERO *py,MISSION out) ///任务奖励：龙之秘宝（5）
 {
+    if(out==0)
+        exit(0);
     printf("获得龙之秘宝！启动秘宝效果\n");
     py->Treasure = TRUE;
 }
