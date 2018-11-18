@@ -1,6 +1,4 @@
-model=./model/*.cpp
-view=./view/*.cpp
-controller=./controller/*.cpp
+COM=gcc
 help:
 	@echo 'You can use 3 commands:'
 	@echo -e '\tmake install'
@@ -8,8 +6,8 @@ help:
 	@echo -e '\tmake debugger'
 install:
 	mkdir -v debug release
-	g++ -g $(model) $(view) $(controller) ./main.cpp -o ./debug/dorasuse-debug
-	g++ $(model) $(view) $(controller) ./main.cpp -o ./release/dorasuse
+	$(COM) -g ./main.cpp -o ./debug/dorasuse-debug
+	$(COM) ./main.cpp -o ./release/dorasuse
 uninstall:
 	rm -rv debug/ release/
 debugger:
